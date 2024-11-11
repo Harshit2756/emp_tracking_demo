@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "619953341229",
+    "project_id": "empdemo-e7ebd",
+    "storage_bucket": "empdemo-e7ebd.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:619953341229:android:b676a73feeb60a424bc9a4",
+        "android_client_info": {
+          "package_name": "com.example.emp_tracking_demo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB3l7MxFH5EqGIJhtFccS63H6J3pGM9gXs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
