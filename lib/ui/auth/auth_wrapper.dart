@@ -1,8 +1,7 @@
+import 'package:emp_tracking_demo/services/permission_handler.dart';
 import 'package:emp_tracking_demo/shared/storage_helper.dart';
 import 'package:emp_tracking_demo/ui/auth/login.dart';
 import 'package:emp_tracking_demo/ui/employee/attedance.dart';
-import 'package:emp_tracking_demo/ui/home/home.dart';
-import 'package:emp_tracking_demo/services/permission_handler.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -14,25 +13,8 @@ class AuthWrapper extends StatefulWidget {
 }
 
 class _AuthWrapperState extends State<AuthWrapper> {
-  final PermissionHandlerService _permissionService = PermissionHandlerService();
-
-  @override
-  void initState() {
-    super.initState();
-    _checkPermissions();
-  }
-
-  Future<void> _checkPermissions() async {
-    Map<Permission, bool> permissions = await _permissionService.handleRequiredPermissions();
-    
-    if (!permissions[Permission.camera]! || !permissions[Permission.location]!) {
-      // If permissions are permanently denied, open app settings
-      if (await _permissionService.isPermanentlyDenied(Permission.camera) ||
-          await _permissionService.isPermanentlyDenied(Permission.location)) {
-        await _permissionService.openAppSettings();
-      }
-    }
-  }
+  final PermissionHandlerService _permissionService =
+      PermissionHandlerService();
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +32,7 @@ class _AuthWrapperState extends State<AuthWrapper> {
           }
 
           final bool isLoggedIn = snapshot.data ?? false;
-          
+
           if (isLoggedIn) {
             return const AttendancePage(); // You'll need to create this
           } else {
@@ -59,5 +41,25 @@ class _AuthWrapperState extends State<AuthWrapper> {
         },
       ),
     );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _checkPermissions();
+  }
+
+  Future<void> _checkPermissions() async {
+    Map<Permission, bool> permissions =
+        await _permissionService.handleRequiredPermissions();
+
+    if (!permissions[Permission.camera]! ||
+        !permissions[Permission.location]!) {
+      // If permissions are permanently denied, open app settings
+      if (await _permissionService.isPermanentlyDenied(Permission.camera) ||
+          await _permissionService.isPermanentlyDenied(Permission.location)) {
+        await _permissionService.openAppSettings();
+      }
+    }
   }
 }

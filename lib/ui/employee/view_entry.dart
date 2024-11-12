@@ -1,7 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
-import 'dart:convert';
 
 class ViewEntryPage extends StatelessWidget {
   final String time;
@@ -11,13 +12,13 @@ class ViewEntryPage extends StatelessWidget {
   final bool isEntry;
 
   const ViewEntryPage({
-    Key? key,
+    super.key,
     required this.time,
     this.image,
     this.lat,
     this.lng,
     required this.isEntry,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +44,7 @@ class ViewEntryPage extends StatelessWidget {
               ),
             ),
             if (image != null)
-              Container(
+              SizedBox(
                 height: 300,
                 width: double.infinity,
                 child: Hero(
@@ -80,7 +81,8 @@ class ViewEntryPage extends StatelessWidget {
                         ),
                         children: [
                           TileLayer(
-                            urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                            urlTemplate:
+                                'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
                             userAgentPackageName: 'com.yourapp.name',
                           ),
                           MarkerLayer(
@@ -110,20 +112,22 @@ class ViewEntryPage extends StatelessWidget {
                           heroTag: 'zoom_in_$time',
                           onPressed: () {
                             final currentZoom = mapController.zoom;
-                            mapController.move(LatLng(lat!, lng!), currentZoom + 1);
+                            mapController.move(
+                                LatLng(lat!, lng!), currentZoom + 1);
                           },
-                          child: const Icon(Icons.add),
                           backgroundColor: isEntry ? Colors.teal : Colors.blue,
+                          child: const Icon(Icons.add),
                         ),
                         const SizedBox(height: 8),
                         FloatingActionButton.small(
                           heroTag: 'zoom_out_$time',
                           onPressed: () {
                             final currentZoom = mapController.zoom;
-                            mapController.move(LatLng(lat!, lng!), currentZoom - 1);
+                            mapController.move(
+                                LatLng(lat!, lng!), currentZoom - 1);
                           },
-                          child: const Icon(Icons.remove),
                           backgroundColor: isEntry ? Colors.teal : Colors.blue,
+                          child: const Icon(Icons.remove),
                         ),
                       ],
                     ),

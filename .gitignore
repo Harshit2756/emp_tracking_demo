@@ -42,8 +42,10 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
-
 /windows/
 /web/
 /linux/
 /macos/
+
+# FVM Version Cache
+.fvm/
